@@ -77,18 +77,17 @@ showScreen(currentQ);
 function answer(qNum, ans) {
   answers[qNum] = ans;
 
-  // Change PAPPER color
+  // Change background
   document.body.style.backgroundColor = ans === 'yes' ? '#FFFFFF' : '#FF5555';
 
   // Hide buttons
   document.getElementById('q' + qNum).querySelectorAll('button').forEach(b => b.style.display = 'none');
 
-  // Move to next question or show result
   if(currentQ < 3) {
     currentQ++;
     setTimeout(() => { showScreen(currentQ); }, 500);
   } else {
-    // Determine result based on Q1 & Q2
+    // Show final fullscreen after Q3
     let resultText = '';
     if(answers[1] === 'yes' && answers[2] === 'yes') {
       resultText = "Let's get married 💍";
@@ -97,11 +96,10 @@ function answer(qNum, ans) {
     } else {
       resultText = "I'll consider it 🤔";
     }
-    // Show final result fullscreen
     setTimeout(() => { showFinalScreen(resultText); }, 500);
   }
 }
 </script>
 
 </body>
-    </html>
+  </html>
