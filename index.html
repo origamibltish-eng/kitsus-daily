@@ -26,8 +26,10 @@
   }
   #result {
     margin-top: 50px;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
+    min-height: 40px;
+    white-space: pre-line;
   }
 </style>
 </head>
@@ -62,27 +64,26 @@ function showScreen(qNum) {
   document.getElementById('q' + qNum).style.display = 'block';
 }
 
-// Set initial screen
+// Initial screen
 showScreen(currentQ);
 
 function answer(qNum, ans) {
   answers[qNum] = ans;
 
   // Change PAPPER color
-  if(ans === 'yes') {
-    document.body.style.backgroundColor = '#FFFFFF';
-  } else {
-    document.body.style.backgroundColor = '#FF5555';
-  }
+  document.body.style.backgroundColor = ans === 'yes' ? '#FFFFFF' : '#FF5555';
 
   // Hide clicked buttons
   document.getElementById('q' + qNum).querySelectorAll('button').forEach(b => b.style.display = 'none');
 
-  // Move to next question
+  // Move to next question or show result
   if(currentQ < 3) {
     currentQ++;
-    setTimeout(() => { showScreen(currentQ); }, 500); // small delay for PAPPER change effect
+    setTimeout(() => { showScreen(currentQ); }, 500);
   } else {
+    // Increment currentQ to prevent “stuck” di pertanyaan 3
+    currentQ++;
+
     // Show result after all questions answered
     let resultText = '';
     if(answers[1] === 'yes' && answers[2] === 'yes') {
@@ -98,4 +99,4 @@ function answer(qNum, ans) {
 </script>
 
 </body>
-    </html>
+</html>
