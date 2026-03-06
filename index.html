@@ -24,12 +24,12 @@
     font-size: 18px;
     cursor: pointer;
   }
-  #result {
-    margin-top: 50px;
+  #finalScreen {
+    display: none;
+    height: 100vh;
+    padding-top: 30vh;
     font-size: 28px;
     font-weight: bold;
-    min-height: 40px;
-    white-space: pre-line;
   }
 </style>
 </head>
@@ -53,7 +53,7 @@
   <button onclick="answer(3,'no')">No</button>
 </div>
 
-<h2 id="result"></h2>
+<div id="finalScreen"></div>
 
 <script>
 let answers = {};
@@ -62,6 +62,13 @@ let currentQ = 1;
 function showScreen(qNum) {
   document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
   document.getElementById('q' + qNum).style.display = 'block';
+}
+
+function showFinalScreen(text) {
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  const final = document.getElementById('finalScreen');
+  final.style.display = 'block';
+  final.textContent = text;
 }
 
 // Initial screen
@@ -73,7 +80,7 @@ function answer(qNum, ans) {
   // Change PAPPER color
   document.body.style.backgroundColor = ans === 'yes' ? '#FFFFFF' : '#FF5555';
 
-  // Hide clicked buttons
+  // Hide buttons
   document.getElementById('q' + qNum).querySelectorAll('button').forEach(b => b.style.display = 'none');
 
   // Move to next question or show result
@@ -81,10 +88,7 @@ function answer(qNum, ans) {
     currentQ++;
     setTimeout(() => { showScreen(currentQ); }, 500);
   } else {
-    // Increment currentQ to prevent “stuck” di pertanyaan 3
-    currentQ++;
-
-    // Show result after all questions answered
+    // Determine result based on Q1 & Q2
     let resultText = '';
     if(answers[1] === 'yes' && answers[2] === 'yes') {
       resultText = "Let's get married 💍";
@@ -93,10 +97,11 @@ function answer(qNum, ans) {
     } else {
       resultText = "I'll consider it 🤔";
     }
-    document.getElementById('result').textContent = resultText;
+    // Show final result fullscreen
+    setTimeout(() => { showFinalScreen(resultText); }, 500);
   }
 }
 </script>
 
 </body>
-</html>
+    </html>
