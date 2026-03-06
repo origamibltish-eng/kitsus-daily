@@ -3,69 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Rin</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-
+<title>Three Quest Mini Quiz</title>
 <style>
-
-body{
-  font-family:'Quicksand', sans-serif;
-  display:flex;
-  justify-content:center;
-  margin:0;
-  color:black; /* teks hitam */
-}
-
-#paper{
-  width:700px;
-  background:#BBDEFB; /* kertas/kanvas tempat teks */
-  margin-top:60px;
-  padding:50px;
-  box-shadow:0 0 15px rgba(0,0,0,0.1);
-  line-height:1.8;
-}
-
-h1{
-  text-align:center;
-  font-size:40px;
-  margin-bottom:40px;
-}
-
-.entry{
-  margin-bottom:45px;
-}
-
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    transition: background-color 0.5s;
+    background-color: #BBDEFB;
+  }
+  .screen {
+    display: none;
+    height: 100vh;
+    padding-top: 20vh;
+  }
+  button {
+    padding: 15px 30px;
+    margin: 15px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  #result {
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+  }
 </style>
 </head>
-
 <body>
 
-<div id="paper">
-
-<h1>Untuk Rin</h1>
-
-<div class="entry">
-
-<p>Hai rin, ini website buatan gua sendiri, lu tau ga kalo gue bikin ini sampe berjam jam, ini khusus buat lo aja dong🙄.</p>
-
-<p>Jadi gue cuman mau bilang makasih udah jdi temen terbaik gue, susah senang pun selalu ada.</p>
-
-<p>Jujur gue pengen banget ketemuan sama lu, cape ya jdi long distance friend, kalo aja deket, udh gue samperin rumah lo tiap hari.</p>
-
-<p>Semoga aja kita bisa ketemuan lebih cepat, secara fisik, gue pengen meluk lo sampe mati kehabisan nafas, wkwkwk canda anjir.</p>
-
-<p>Nnti kita ke laut bareng, nikmatin pemandangan langit, ngegambar bareng dsb, gue pengen banget gitu, alasan gua bertahan karena gua tahu gua masih punya lu dan keluarga.</p>
-
-<p>Sebagai seorang pendiam kek gua, dpt temen yg se frekuensi seotak itu susah, gue terlalu pinter buat mereka, anjayyy, hehe, pokonya itu aja</p>
-
-<p>Thankyou rin udh jdi temen gue, aduh pengen gue gedor pintu lo klo deket</p>
-
-<p>😘😘😘😘😘</p>
-
+<div id="q1" class="screen">
+  <p>1. Do you love me?</p>
+  <button onclick="answer(1,'yes')">Yes</button>
+  <button onclick="answer(1,'no')">No</button>
 </div>
 
+<div id="q2" class="screen">
+  <p>2. Do you need me?</p>
+  <button onclick="answer(2,'yes')">Yes</button>
+  <button onclick="answer(2,'no')">No</button>
 </div>
+
+<div id="q3" class="screen">
+  <p>3. Are you happy today?</p>
+  <button onclick="answer(3,'yes')">Yes</button>
+  <button onclick="answer(3,'no')">No</button>
+</div>
+
+<h2 id="result"></h2>
+
+<script>
+let answers = {};
+let currentQ = 1;
+
+function showScreen(qNum) {
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  document.getElementById('q' + qNum).style.display = 'block';
+}
+
+// Set initial screen
+showScreen(currentQ);
+
+function answer(qNum, ans) {
+  answers[qNum] = ans;
+
+  // Change PAPPER color
+  if(ans === 'yes') {
+    document.body.style.backgroundColor = '#FFFFFF';
+  } else {
+    document.body.style.backgroundColor = '#FF5555';
+  }
+
+  // Hide clicked buttons
+  document.getElementById('q' + qNum).querySelectorAll('button').forEach(b => b.style.display = 'none');
+
+  // Move to next question
+  if(currentQ < 3) {
+    currentQ++;
+    setTimeout(() => { showScreen(currentQ); }, 500); // small delay for PAPPER change effect
+  } else {
+    // Show result after all questions answered
+    let resultText = '';
+    if(answers[1] === 'yes' && answers[2] === 'yes') {
+      resultText = "Let's get married 💍";
+    } else if(answers[1] === 'no' && answers[2] === 'no') {
+      resultText = "You will die tomorrow 🙄 (jk)";
+    } else {
+      resultText = "I'll consider it 🤔";
+    }
+    document.getElementById('result').textContent = resultText;
+  }
+}
+</script>
 
 </body>
-  </html>
+    </html>
