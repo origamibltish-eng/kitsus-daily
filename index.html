@@ -22,14 +22,15 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-gap:25px;
+gap:30px;
 }
 
 button{
-padding:20px 70px;
-font-size:24px;
+padding:25px 90px;
+font-size:26px;
 border:1px solid black;
 background:white;
+color:black;
 cursor:pointer;
 }
 
@@ -40,10 +41,25 @@ display:none;
 height:100vh;
 justify-content:center;
 align-items:center;
-text-align:center;
+text-align:left;
 font-size:22px;
 line-height:1.9;
 padding:40px;
+gap:40px;
+}
+
+/* BACK BUTTON */
+
+#back{
+position:absolute;
+right:40px;
+top:40px;
+padding:15px 40px;
+font-size:20px;
+border:1px solid black;
+background:white;
+color:black;
+cursor:pointer;
 }
 
 </style>
@@ -62,6 +78,8 @@ padding:40px;
 
 <div id="character"></div>
 
+<button id="back" onclick="back()">Back</button>
+
 <script>
 
 function show(name){
@@ -70,6 +88,8 @@ document.getElementById("menu").style.display="none";
 
 let c = document.getElementById("character");
 c.style.display="flex";
+
+document.getElementById("back").style.display="block";
 
 if(name==="kitsu"){
 c.innerHTML=`
@@ -119,7 +139,15 @@ Origin: United States
 
 }
 
+function back(){
+
+document.getElementById("menu").style.display="flex";
+document.getElementById("character").style.display="none";
+document.getElementById("back").style.display="none";
+
+}
+
 </script>
 
 </body>
-</html>
+  </html>
