@@ -2,103 +2,126 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Three Quest Mini Quiz</title>
+<title>Character Identity</title>
+
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    transition: background-color 0.5s;
-    background-color: #BBDEFB;
-  }
-  .screen {
-    display: none;
-    height: 100vh;
-    padding-top: 20vh;
-  }
-  button {
-    padding: 15px 30px;
-    margin: 15px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  #finalScreen {
-    display: none;
-    height: 100vh;
-    padding-top: 30vh;
-    font-size: 28px;
-    font-weight: bold;
-  }
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:white;
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+transition:0.5s;
+}
+
+#menu{
+position:absolute;
+top:20px;
+display:flex;
+gap:12px;
+}
+
+button{
+padding:10px 22px;
+border:none;
+cursor:pointer;
+font-size:16px;
+border-radius:6px;
+background:#eaeaea;
+}
+
+#content{
+text-align:center;
+max-width:600px;
+line-height:1.9;
+font-size:19px;
+}
+
 </style>
 </head>
+
 <body>
 
-<div id="q1" class="screen">
-  <p>1. Do you love me?</p>
-  <button onclick="answer(1,'yes')">Yes</button>
-  <button onclick="answer(1,'no')">No</button>
+<div id="menu">
+
+<button onclick="showKitsu()">Kitsu</button>
+<button onclick="showNyx()">Thvenoir</button>
+<button onclick="showArd()">Ard</button>
+<button onclick="showNaloe()">Naloe</button>
+
 </div>
 
-<div id="q2" class="screen">
-  <p>2. Do you need me?</p>
-  <button onclick="answer(2,'yes')">Yes</button>
-  <button onclick="answer(2,'no')">No</button>
-</div>
-
-<div id="q3" class="screen">
-  <p>3. Are you happy today?</p>
-  <button onclick="answer(3,'yes')">Yes</button>
-  <button onclick="answer(3,'no')">No</button>
-</div>
-
-<div id="finalScreen"></div>
+<div id="content"></div>
 
 <script>
-let answers = {};
-let currentQ = 1;
 
-function showScreen(qNum) {
-  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-  document.getElementById('q' + qNum).style.display = 'block';
+function showKitsu(){
+document.body.style.background="#98ffcc";
+
+document.getElementById("content").innerHTML=`
+
+Real Name: Yevgenyevich Slovascki<br>
+Noble Identity: Fistrovis Garavilye<br>
+Nickname: Kitsu<br>
+Age: 31 (born May 3, 1995)<br>
+Height: 210 cm<br>
+Weight: 97 kg<br>
+Title: Duke of the East, nicknamed the Northern Duke<br>
+Origin: Russia
+
+`;
 }
 
-function showFinalScreen(text) {
-  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-  const final = document.getElementById('finalScreen');
-  final.style.display = 'block';
-  final.textContent = text;
+function showNyx(){
+document.body.style.background="black";
+
+document.getElementById("content").innerHTML=`
+
+Real Name: Nyx Thvenoir<br>
+Former Mafia Boss<br>
+Age: 48 (born November 2, 1978)<br>
+Height: 192 cm<br>
+Weight: 76 kg<br>
+Origin: United States
+
+`;
 }
 
-// Initial screen
-showScreen(currentQ);
+function showArd(){
+document.body.style.background="#40E0D0";
 
-function answer(qNum, ans) {
-  answers[qNum] = ans;
+document.getElementById("content").innerHTML=`
 
-  // Change background
-  document.body.style.backgroundColor = ans === 'yes' ? '#FFFFFF' : '#FF5555';
+Real Name: Patriot de Routh Ard<br>
+Former Noble (Baron, 5% true noble blood), now a Mafia member<br>
+Age: 50 (born February 4, 1976)<br>
+Height: 206 cm<br>
+Weight: 84 kg<br>
+Origin: England
 
-  // Hide buttons
-  document.getElementById('q' + qNum).querySelectorAll('button').forEach(b => b.style.display = 'none');
-
-  if(currentQ < 3) {
-    currentQ++;
-    setTimeout(() => { showScreen(currentQ); }, 500);
-  } else {
-    // Show final fullscreen after Q3
-    let resultText = '';
-    if(answers[1] === 'yes' && answers[2] === 'yes') {
-      resultText = "Let's get married 💍";
-    } else if(answers[1] === 'no' && answers[2] === 'no') {
-      resultText = "You will die tomorrow 🙄 (jk)";
-    } else {
-      resultText = "I'll consider it 🤔";
-    }
-    setTimeout(() => { showFinalScreen(resultText); }, 500);
-  }
+`;
 }
+
+function showNaloe(){
+document.body.style.background="#5a2a82";
+
+document.getElementById("content").innerHTML=`
+
+Real Name: Naell Thvenoir<br>
+Sniper, works at a flower shop<br>
+Age: 29 (born June 8, 1997)<br>
+Height: 182 cm<br>
+Weight: 65 kg<br>
+Origin: United States
+
+`;
+}
+
 </script>
 
 </body>
