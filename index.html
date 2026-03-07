@@ -9,37 +9,34 @@
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:white;
-color:white;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
 height:100vh;
-transition:0.5s;
+display:flex;
+justify-content:center;
+align-items:center;
+background:white;
+transition:0.4s;
 }
 
 #menu{
-position:absolute;
-top:20px;
 display:flex;
-gap:12px;
+gap:15px;
 }
 
 button{
-padding:10px 22px;
+padding:12px 25px;
+font-size:18px;
 border:none;
-cursor:pointer;
-font-size:16px;
 border-radius:6px;
+cursor:pointer;
 background:#eaeaea;
 }
 
 #content{
+color:white;
+font-size:20px;
+line-height:1.9;
 text-align:center;
 max-width:600px;
-line-height:1.9;
-font-size:19px;
 }
 
 </style>
@@ -48,23 +45,26 @@ font-size:19px;
 <body>
 
 <div id="menu">
-
-<button onclick="showKitsu()">Kitsu</button>
-<button onclick="showNyx()">Thvenoir</button>
-<button onclick="showArd()">Ard</button>
-<button onclick="showNaloe()">Naloe</button>
-
+<button onclick="showCharacter('kitsu')">Kitsu</button>
+<button onclick="showCharacter('nyx')">Thvenoir</button>
+<button onclick="showCharacter('ard')">Ard</button>
+<button onclick="showCharacter('naloe')">Naloe</button>
 </div>
 
 <div id="content"></div>
 
 <script>
 
-function showKitsu(){
-document.body.style.background="#98ffcc";
+function showCharacter(char){
 
-document.getElementById("content").innerHTML=`
+document.getElementById("menu").style.display="none";
 
+let text="";
+let color="";
+
+if(char==="kitsu"){
+color="#98ffcc";
+text=`
 Real Name: Yevgenyevich Slovascki<br>
 Noble Identity: Fistrovis Garavilye<br>
 Nickname: Kitsu<br>
@@ -73,53 +73,48 @@ Height: 210 cm<br>
 Weight: 97 kg<br>
 Title: Duke of the East, nicknamed the Northern Duke<br>
 Origin: Russia
-
 `;
 }
 
-function showNyx(){
-document.body.style.background="black";
-
-document.getElementById("content").innerHTML=`
-
+if(char==="nyx"){
+color="black";
+text=`
 Real Name: Nyx Thvenoir<br>
 Former Mafia Boss<br>
 Age: 48 (born November 2, 1978)<br>
 Height: 192 cm<br>
 Weight: 76 kg<br>
 Origin: United States
-
 `;
 }
 
-function showArd(){
-document.body.style.background="#40E0D0";
-
-document.getElementById("content").innerHTML=`
-
+if(char==="ard"){
+color="#40E0D0";
+text=`
 Real Name: Patriot de Routh Ard<br>
 Former Noble (Baron, 5% true noble blood), now a Mafia member<br>
 Age: 50 (born February 4, 1976)<br>
 Height: 206 cm<br>
 Weight: 84 kg<br>
 Origin: England
-
 `;
 }
 
-function showNaloe(){
-document.body.style.background="#5a2a82";
-
-document.getElementById("content").innerHTML=`
-
+if(char==="naloe"){
+color="#5a2a82";
+text=`
 Real Name: Naell Thvenoir<br>
 Sniper, works at a flower shop<br>
 Age: 29 (born June 8, 1997)<br>
 Height: 182 cm<br>
 Weight: 65 kg<br>
 Origin: United States
-
 `;
+}
+
+document.body.style.background=color;
+document.getElementById("content").innerHTML=text;
+
 }
 
 </script>
